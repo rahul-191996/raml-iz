@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<db:config name="Database_Config" doc:name="Database Config" doc:id="8c7b7d84-f0e7-4878-92ab-148e74628be2" >
+		<db:my-sql-connection host="db4free.net" port="3306" user="rahul1996" password="godisgreat@123" database="rahulapisero" />
+	</db:config>
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="9ca02880-c01e-4f3b-87c9-addee1be396f" >
+		<http:request-connection host="mu.lean.umlesoft.com" port="80" />
+	</http:request-config>
+	<flow name="implementationFlow" doc:id="1647384f-82d5-4286-b002-938d810246c2" >
+		<db:select doc:name="Select" doc:id="c18e5617-9281-44c4-953e-f8e52090b4ad" config-ref="Database_Config">
+			<db:sql >select * from customer</db:sql>
+		</db:select>
+		<logger level="INFO" doc:name="Logger" doc:id="bd7eabf2-1efc-406b-beb2-89953f10de06" message="#[payload]" category="monitoring"/>
+	</flow>
+	<flow name="implementationFlow1" doc:id="2e321f1d-52db-41d0-b635-2a7561f73639" >
+		<http:request method="GET" doc:name="Request" doc:id="a58a1de1-3dd7-4d75-98bb-87e9ce234e72" config-ref="HTTP_Request_configuration" path="/oc"/>
+	</flow>
+</mule>

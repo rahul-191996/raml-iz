@@ -1,0 +1,23 @@
+#%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/7e02db94-a631-4d0b-8751-5027cbabfac3/ # 
+title: acc-iz
+/accounts: 
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {
+                message: "success"
+              }
+  /orders:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                {
+                message: "success"
+              }
